@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import morgan from "morgan";
-import { ALLOWED_ORIGINS, NODE_ENV } from "./config/env";
+import { ALLOWED_ORIGINS, NODE_ENV } from "./config/env.config";
 
 // Import routes
 import routes from "./routes";
+import { requestLogger, errorLogger } from "./config/logger.config";
 
 const app = express();
 
@@ -22,10 +22,15 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// Logging middleware (only in development)
+
 if (NODE_ENV === 'development') {
-    app.use(morgan('dev'));
+    app.use(requestLogger);
+} else {
+    // In production, only log critical errors and important requests
+    app.use(errorLogger);
+    app.use(requestLogger);
 }
+
 
 // Health check endpoint
 app.get('/health', (req, res) => {
