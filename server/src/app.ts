@@ -6,6 +6,8 @@ import { ALLOWED_ORIGINS, NODE_ENV } from "./config/env.config";
 // Import routes
 import routes from "./routes";
 import { requestLogger, errorLogger } from "./config/logger.config";
+import { notFoundMiddleware } from "./middlewares/not-found.middleware";
+import { errorHandler } from "./middlewares/error.middleware";
 
 const app = express();
 
@@ -43,19 +45,7 @@ app.get('/health', (req, res) => {
 
 app.use('/api', routes);
 
-app.use((req, res) => {
-    res.status(404).json({
-        error: 'Route not found',
-        path: req.originalUrl
-    });
-});
-
-// Global error handler
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    console.error('Error:', err);
-    res.status(500).json({
-        error: NODE_ENV === 'production' ? 'Internal server error' : err.message
-    });
-});
+app.use(notFoundMiddleware);
+app.use(errorHandler)
 
 export default app;
