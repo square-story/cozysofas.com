@@ -31,16 +31,16 @@ export default function SofaLandingPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
+                <span className="text-white font-bold text-xl">🛋️</span>
               </div>
-              <span className="text-2xl font-bold text-gray-900">StreamLine</span>
+              <span className="text-2xl font-bold text-gray-900">Cozy Sofas</span>
             </div>
 
             <nav className="hidden md:flex items-center space-x-8">
               <Link href="#home" className="text-gray-700 hover:text-amber-600 transition-colors">
                 Home
               </Link>
-              <Link href="#products" className="text-gray-700 hover:text-amber-600 transition-colors">
+              <Link href="/products" className="text-gray-700 hover:text-amber-600 transition-colors">
                 Products
               </Link>
               <Link href="#features" className="text-gray-700 hover:text-amber-600 transition-colors">
@@ -109,7 +109,7 @@ export default function SofaLandingPage() {
 
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=600&width=600"
+                src="https://asembleindia.com/wp-content/uploads/2025/07/image3-1-scaled.jpg"
                 alt="Luxury Sofa Collection"
                 width={600}
                 height={600}
@@ -134,7 +134,7 @@ export default function SofaLandingPage() {
       <section id="features" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose StreamLine Sofas?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Cozy Sofas?</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               We're committed to delivering exceptional quality and service that exceeds your expectations
             </p>
@@ -198,7 +198,7 @@ export default function SofaLandingPage() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow">
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=300&width=400"
+                  src="https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg"
                   alt="Modern Sectional Sofa"
                   width={400}
                   height={300}
@@ -223,7 +223,7 @@ export default function SofaLandingPage() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow">
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=300&width=400"
+                  src="https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg"
                   alt="Luxury Leather Sofa"
                   width={400}
                   height={300}
@@ -248,7 +248,7 @@ export default function SofaLandingPage() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow">
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=300&width=400"
+                  src="https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg"
                   alt="Minimalist Fabric Sofa"
                   width={400}
                   height={300}
@@ -280,7 +280,7 @@ export default function SofaLandingPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section
       <section id="testimonials" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -331,7 +331,7 @@ export default function SofaLandingPage() {
                 </p>
                 <div className="flex items-center space-x-3">
                   <Image
-                    src="/placeholder.svg?height=50&width=50"
+                    src="https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg"
                     alt="Michael Chen"
                     width={50}
                     height={50}
@@ -373,7 +373,7 @@ export default function SofaLandingPage() {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Final CTA Section */}
       <section className="py-20 bg-gradient-to-r from-amber-600 to-orange-600 text-white">
@@ -422,9 +422,9 @@ export default function SofaLandingPage() {
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <div className="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">S</span>
+                  <span className="text-white font-bold text-xl">🛋️</span>
                 </div>
-                <span className="text-2xl font-bold">StreamLine</span>
+                <span className="text-2xl font-bold">Cozy Sofas</span>
               </div>
               <p className="text-gray-400">
                 Transforming homes with premium, handcrafted furniture that combines comfort, style, and durability.

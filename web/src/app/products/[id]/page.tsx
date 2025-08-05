@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 
 import { useState } from "react"
@@ -122,9 +123,8 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <button
                     key={index}
                     onClick={() => setSelectedImageIndex(index)}
-                    className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${
-                      selectedImageIndex === index ? "border-amber-600" : "border-gray-200"
-                    }`}
+                    className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${selectedImageIndex === index ? "border-amber-600" : "border-gray-200"
+                      }`}
                   >
                     <Image
                       src={image || "/placeholder.svg"}
@@ -149,9 +149,8 @@ export default function ProductPage({ params }: ProductPageProps) {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-5 h-5 ${
-                        i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
-                      }`}
+                      className={`w-5 h-5 ${i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
+                        }`}
                     />
                   ))}
                 </div>
@@ -178,11 +177,10 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`px-4 py-2 rounded-lg border-2 text-sm ${
-                      selectedColor === color
-                        ? "border-amber-600 bg-amber-50 text-amber-800"
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
+                    className={`px-4 py-2 rounded-lg border-2 text-sm ${selectedColor === color
+                      ? "border-amber-600 bg-amber-50 text-amber-800"
+                      : "border-gray-200 hover:border-gray-300"
+                      }`}
                   >
                     {color}
                   </button>
@@ -206,10 +204,10 @@ export default function ProductPage({ params }: ProductPageProps) {
 
             {/* Action Buttons */}
             <div className="space-y-3">
-              <Button size="lg" className="w-full bg-amber-600 hover:bg-amber-700" disabled={!product.inStock}>
+              {/* <Button size="lg" className="w-full bg-amber-600 hover:bg-amber-700" disabled={!product.inStock}>
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 {product.inStock ? "Add to Cart" : "Out of Stock"}
-              </Button>
+              </Button> */}
 
               <div className="flex gap-3">
                 <WishlistButton product={product} size="lg" className="flex-1" />
