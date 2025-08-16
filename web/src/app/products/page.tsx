@@ -38,17 +38,17 @@ export default function ProductsPage() {
       }
 
       // Category filter
-      if (filters.categories.length > 0 && !filters.categories.includes(product.category)) {
+      if (filters.categories.length > 0 && !filters.categories.includes(product.category as never)) {
         return false
       }
 
       // Color filter
-      if (filters.colors.length > 0 && !product.colors.some((color) => filters.colors.includes(color))) {
+      if (filters.colors.length > 0 && !product.colors.some((color) => filters.colors.includes(color as never))) {
         return false
       }
 
       // Material filter
-      if (filters.materials.length > 0 && !product.materials.some((material) => filters.materials.includes(material))) {
+      if (filters.materials.length > 0 && !product.materials.some((material) => filters.materials.includes(material as never))) {
         return false
       }
 
@@ -190,9 +190,8 @@ export default function ProductsPage() {
             {/* Products Grid */}
             {paginatedProducts.length > 0 ? (
               <div
-                className={`grid gap-6 ${
-                  viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1"
-                }`}
+                className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1"
+                  }`}
               >
                 {paginatedProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />

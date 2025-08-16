@@ -59,6 +59,7 @@ export function WishlistButton({ product, variant = "default", size = "default",
   }
 
   return (
+    product.inStock &&
     <Button
       variant={inWishlist ? "default" : "outline"}
       size={size}

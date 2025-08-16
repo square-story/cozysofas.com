@@ -82,10 +82,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           </div>
 
-          <Button className="w-full mt-3" disabled={!product.inStock}>
-            <ShoppingCart className="w-4 h-4 mr-2" />
-            {product.inStock ? "Add to Wishlist" : "Out of Stock"}
-          </Button>
+          <WishlistButton product={product} size="lg" className="w-full mt-3" />
         </div>
       </CardContent>
     </Card>
