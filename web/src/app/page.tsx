@@ -78,7 +78,9 @@ export default function SofaLandingPage() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4">
-                  Shop Collection
+                  <Link href="/products">
+                    Shop Collection
+                  </Link>
                 </Button>
                 <WhatsAppShareButton
                   variant="outline"
