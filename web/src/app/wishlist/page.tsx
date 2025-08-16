@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Heart, ShoppingCart, Trash2, ArrowLeft } from "lucide-react"
+import { Heart, Trash2, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useWishlist } from "@/lib/wishlist-context"
@@ -114,7 +114,7 @@ export default function WishlistPage() {
                   {product.isBestSeller && <Badge className="bg-red-500 text-white">Best Seller</Badge>}
                   {product.originalPrice && (
                     <Badge variant="secondary" className="bg-amber-100 text-amber-800">
-                      Save ${product.originalPrice - product.price}
+                      Save ₹{product.originalPrice - product.price}
                     </Badge>
                   )}
                 </div>
@@ -146,25 +146,13 @@ export default function WishlistPage() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xl font-bold text-amber-600">${product.price.toLocaleString()}</span>
+                      <span className="text-xl font-bold text-amber-600">₹{product.price.toLocaleString()}</span>
                       {product.originalPrice && (
                         <span className="text-sm text-gray-500 line-through">
-                          ${product.originalPrice.toLocaleString()}
+                          ₹{product.originalPrice.toLocaleString()}
                         </span>
                       )}
                     </div>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <Button className="flex-1" disabled={!product.inStock}>
-                      <ShoppingCart className="w-4 h-4 mr-2" />
-                      {product.inStock ? "Add to Cart" : "Out of Stock"}
-                    </Button>
-                    <Link href={`/products/${product.id}`}>
-                      <Button variant="outline" size="icon">
-                        <ArrowLeft className="w-4 h-4 rotate-180" />
-                      </Button>
-                    </Link>
                   </div>
                 </div>
               </CardContent>

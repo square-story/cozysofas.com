@@ -46,9 +46,6 @@ export default function SofaLandingPage() {
               <Link href="#features" className="text-gray-700 hover:text-amber-600 transition-colors">
                 Features
               </Link>
-              <Link href="#testimonials" className="text-gray-700 hover:text-amber-600 transition-colors">
-                Reviews
-              </Link>
               <Link href="#contact" className="text-gray-700 hover:text-amber-600 transition-colors">
                 Contact
               </Link>
@@ -147,7 +144,7 @@ export default function SofaLandingPage() {
                   <Truck className="w-8 h-8 text-amber-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900">Free Delivery</h3>
-                <p className="text-gray-600">Complimentary delivery and setup service for all orders above $500</p>
+                <p className="text-gray-600">Complimentary delivery and setup service for all orders above ₹500</p>
               </CardContent>
             </Card>
 
@@ -210,12 +207,7 @@ export default function SofaLandingPage() {
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Modern Sectional</h3>
                 <p className="text-gray-600 mb-4">Spacious L-shaped sectional perfect for large families</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-amber-600">$1,299</span>
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
-                    ))}
-                  </div>
+                  <span className="text-2xl font-bold text-amber-600">₹1,299</span>
                 </div>
               </CardContent>
             </Card>
@@ -235,12 +227,7 @@ export default function SofaLandingPage() {
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Luxury Leather</h3>
                 <p className="text-gray-600 mb-4">Premium Italian leather with exceptional comfort</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-amber-600">$2,199</span>
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
-                    ))}
-                  </div>
+                  <span className="text-2xl font-bold text-amber-600">₹2,199</span>
                 </div>
               </CardContent>
             </Card>
@@ -260,13 +247,7 @@ export default function SofaLandingPage() {
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Minimalist Fabric</h3>
                 <p className="text-gray-600 mb-4">Clean lines with sustainable materials</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-amber-600">$899</span>
-                  <div className="flex text-yellow-400">
-                    {[...Array(4)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
-                    ))}
-                    <Star className="w-4 h-4 text-gray-300" />
-                  </div>
+                  <span className="text-2xl font-bold text-amber-600">₹899</span>
                 </div>
               </CardContent>
             </Card>
@@ -353,7 +334,7 @@ export default function SofaLandingPage() {
                   ))}
                 </div>
                 <p className="text-gray-700 italic">
-                  "Three years later and our StreamLine sofa still looks brand new. The quality and durability are
+                  "Three years later and our Cozy sofa still looks brand new. The quality and durability are
                   unmatched. Highly recommend!"
                 </p>
                 <div className="flex items-center space-x-3">
@@ -393,7 +374,7 @@ export default function SofaLandingPage() {
                 className="border-white text-white hover:bg-white hover:text-amber-600 px-8 py-4 bg-transparent"
               >
                 <Phone className="w-5 h-5 mr-2" />
-                Call Now: (555) 123-4567
+                Call Now: {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}
               </Button>
             </div>
 
@@ -517,7 +498,7 @@ export default function SofaLandingPage() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-4 h-4" />
-                  <span>hello@streamlinefurniture.com</span>
+                  <span>hello@cozysofas.in</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <MessageCircle className="w-4 h-4" />
@@ -528,7 +509,7 @@ export default function SofaLandingPage() {
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} StreamLine Furniture. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} cozy sofas. All rights reserved.</p>
           </div>
         </div>
       </footer>

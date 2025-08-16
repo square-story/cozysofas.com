@@ -31,7 +31,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.isBestSeller && <Badge className="bg-red-500 text-white">Best Seller</Badge>}
           {product.originalPrice && (
             <Badge variant="secondary" className="bg-amber-100 text-amber-800">
-              Save ${product.originalPrice - product.price}
+              Save ₹{product.originalPrice - product.price}
             </Badge>
           )}
         </div>
@@ -66,29 +66,25 @@ export function ProductCard({ product }: ProductCardProps) {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-4 h-4 ${
-                    i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
-                  }`}
+                  className={`w-4 h-4 ${i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
+                    }`}
                 />
               ))}
             </div>
-            <span className="text-sm text-gray-600">
-              {product.rating} ({product.reviewCount})
-            </span>
           </div>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-amber-600">${product.price.toLocaleString()}</span>
+              <span className="text-2xl font-bold text-amber-600">₹{product.price.toLocaleString()}</span>
               {product.originalPrice && (
-                <span className="text-lg text-gray-500 line-through">${product.originalPrice.toLocaleString()}</span>
+                <span className="text-lg text-gray-500 line-through">₹{product.originalPrice.toLocaleString()}</span>
               )}
             </div>
           </div>
 
           <Button className="w-full mt-3" disabled={!product.inStock}>
             <ShoppingCart className="w-4 h-4 mr-2" />
-            {product.inStock ? "Add to Cart" : "Out of Stock"}
+            {product.inStock ? "Add to Wishlist" : "Out of Stock"}
           </Button>
         </div>
       </CardContent>

@@ -12,7 +12,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Star,
   Share2,
-  ShoppingCart,
   Truck,
   Shield,
   RotateCcw,
@@ -110,7 +109,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 {product.isBestSeller && <Badge className="bg-red-500 text-white">Best Seller</Badge>}
                 {product.originalPrice && (
                   <Badge variant="secondary" className="bg-amber-100 text-amber-800">
-                    Save ${product.originalPrice - product.price}
+                    Save ₹{product.originalPrice - product.price}
                   </Badge>
                 )}
               </div>
@@ -154,15 +153,12 @@ export default function ProductPage({ params }: ProductPageProps) {
                     />
                   ))}
                 </div>
-                <span className="text-gray-600">
-                  {product.rating} ({product.reviewCount} reviews)
-                </span>
               </div>
 
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-3xl font-bold text-amber-600">${product.price.toLocaleString()}</span>
+                <span className="text-3xl font-bold text-amber-600">₹{product.price.toLocaleString()}</span>
                 {product.originalPrice && (
-                  <span className="text-xl text-gray-500 line-through">${product.originalPrice.toLocaleString()}</span>
+                  <span className="text-xl text-gray-500 line-through">₹{product.originalPrice.toLocaleString()}</span>
                 )}
               </div>
 
@@ -204,10 +200,6 @@ export default function ProductPage({ params }: ProductPageProps) {
 
             {/* Action Buttons */}
             <div className="space-y-3">
-              {/* <Button size="lg" className="w-full bg-amber-600 hover:bg-amber-700" disabled={!product.inStock}>
-                <ShoppingCart className="w-5 h-5 mr-2" />
-                {product.inStock ? "Add to Cart" : "Out of Stock"}
-              </Button> */}
 
               <div className="flex gap-3">
                 <WishlistButton product={product} size="lg" className="flex-1" />
@@ -257,10 +249,9 @@ export default function ProductPage({ params }: ProductPageProps) {
         {/* Product Details Tabs */}
         <div className="mt-16">
           <Tabs defaultValue="details" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="details">Details</TabsTrigger>
               <TabsTrigger value="specifications">Specifications</TabsTrigger>
-              <TabsTrigger value="reviews">Reviews</TabsTrigger>
               <TabsTrigger value="shipping">Shipping</TabsTrigger>
             </TabsList>
 
@@ -321,15 +312,6 @@ export default function ProductPage({ params }: ProductPageProps) {
               </Card>
             </TabsContent>
 
-            <TabsContent value="reviews" className="mt-6">
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">Customer Reviews</h3>
-                  <div className="text-center py-8 text-gray-500">Reviews feature coming soon...</div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
             <TabsContent value="shipping" className="mt-6">
               <Card>
                 <CardContent className="p-6">
@@ -376,10 +358,6 @@ export default function ProductPage({ params }: ProductPageProps) {
                     </Link>
                     <div className="flex items-center justify-between mt-2">
                       <span className="font-bold text-amber-600">${relatedProduct.price.toLocaleString()}</span>
-                      <div className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                        <span className="text-sm text-gray-600 ml-1">{relatedProduct.rating}</span>
-                      </div>
                     </div>
                   </CardContent>
                 </Card>

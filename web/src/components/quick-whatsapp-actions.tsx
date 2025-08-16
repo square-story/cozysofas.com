@@ -7,7 +7,7 @@ import { WhatsAppShareButton } from "@/components/whatsapp-share-button"
 
 export function QuickWhatsAppActions() {
   const handleQuickInquiry = () => {
-    const message = `Hi StreamLine Furniture! 👋
+    const message = `Hi Cozy Sofas! 👋🏻
 
 I'm interested in learning more about your sofa collection. Could you please help me with:
 
@@ -19,12 +19,12 @@ I'm interested in learning more about your sofa collection. Could you please hel
 Thank you!`
 
     const encodedMessage = encodeURIComponent(message)
-    const whatsappUrl = `https://wa.me/1234567890?text=${encodedMessage}`
+    const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${encodedMessage}`
     window.open(whatsappUrl, "_blank")
   }
 
   const handleCustomDesign = () => {
-    const message = `Hi StreamLine Furniture! 🛋️
+    const message = `Hi Cozy Sofas! 🛋️
 
 I'm interested in custom furniture design services. I'd like to discuss:
 
@@ -36,7 +36,7 @@ I'm interested in custom furniture design services. I'd like to discuss:
 Looking forward to hearing from you!`
 
     const encodedMessage = encodeURIComponent(message)
-    const whatsappUrl = `https://wa.me/1234567890?text=${encodedMessage}`
+    const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${encodedMessage}`
     window.open(whatsappUrl, "_blank")
   }
 
@@ -49,13 +49,13 @@ Looking forward to hearing from you!`
           <p className="text-sm text-gray-600">Get instant help from our furniture experts</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-3">
+        <div className="grid sm:grid-cols-2 gap-2">
           <Button
             variant="outline"
             onClick={handleQuickInquiry}
             className="bg-white border-green-200 text-green-700 hover:bg-green-50"
           >
-            <MessageCircle className="w-4 h-4 mr-2" />
+            <MessageCircle className="w-2 h-2 mr-0" />
             General Inquiry
           </Button>
 
@@ -64,7 +64,7 @@ Looking forward to hearing from you!`
             onClick={handleCustomDesign}
             className="bg-white border-green-200 text-green-700 hover:bg-green-50"
           >
-            <Phone className="w-4 h-4 mr-2" />
+            <Phone className="w-2 h-2 mr-0" />
             Custom Design
           </Button>
         </div>

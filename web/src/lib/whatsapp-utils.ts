@@ -12,7 +12,7 @@ export function formatWishlistForWhatsApp(wishlistItems: Product[], userInfo: Us
   const currentDate = new Date().toLocaleDateString()
   const totalValue = wishlistItems.reduce((sum, item) => sum + item.price, 0)
 
-  let message = `🛋️ *STREAMLINE FURNITURE - WISHLIST INQUIRY*\n\n`
+  let message = `🛋️ *COZY FURNITURE - WISHLIST INQUIRY*\n\n`
 
   // Customer Information
   message += `👤 *Customer Information:*\n`
@@ -36,7 +36,6 @@ export function formatWishlistForWhatsApp(wishlistItems: Product[], userInfo: Us
     message += `\n`
     message += `   📏 Size: ${item.dimensions.width}"W × ${item.dimensions.height}"H × ${item.dimensions.depth}"D\n`
     message += `   🎨 Available Colors: ${item.colors.join(", ")}\n`
-    message += `   ⭐ Rating: ${item.rating}/5 (${item.reviewCount} reviews)\n`
 
     if (!item.inStock) {
       message += `   ❌ Currently Out of Stock\n`

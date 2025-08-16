@@ -5,7 +5,6 @@ export interface Product {
   price: number
   originalPrice?: number
   rating: number
-  reviewCount: number
   images: string[]
   category: string
   colors: string[]
@@ -30,7 +29,6 @@ export const products: Product[] = [
     price: 1299,
     originalPrice: 1599,
     rating: 4.8,
-    reviewCount: 124,
     images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
@@ -51,9 +49,7 @@ export const products: Product[] = [
     name: "Luxury Leather Recliner",
     description: "Premium Italian leather recliner with built-in massage function and USB charging ports.",
     price: 2199,
-    rating: 4.9,
-    reviewCount: 89,
-    images: [
+    rating: 4.9, images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
@@ -74,9 +70,7 @@ export const products: Product[] = [
     description: "Clean lines with sustainable materials. Perfect for small spaces and modern aesthetics.",
     price: 899,
     originalPrice: 1099,
-    rating: 4.6,
-    reviewCount: 67,
-    images: [
+    rating: 4.6, images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
@@ -97,7 +91,6 @@ export const products: Product[] = [
     description: "Timeless design with button-tufted leather and rolled arms. A statement piece for any living room.",
     price: 1899,
     rating: 4.7,
-    reviewCount: 156,
     images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT3-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT3-1024x683.jpg",
@@ -118,9 +111,7 @@ export const products: Product[] = [
     name: "Contemporary Modular Sofa",
     description: "Flexible modular design that adapts to your space. Mix and match pieces for custom configurations.",
     price: 1599,
-    rating: 4.5,
-    reviewCount: 92,
-    images: [
+    rating: 4.5, images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
@@ -140,9 +131,7 @@ export const products: Product[] = [
     name: "Vintage Velvet Armchair",
     description: "Luxurious velvet upholstery with brass accents. Perfect accent piece for any sophisticated interior.",
     price: 799,
-    rating: 4.4,
-    reviewCount: 43,
-    images: [
+    rating: 4.4, images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
