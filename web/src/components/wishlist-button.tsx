@@ -35,7 +35,9 @@ export function WishlistButton({ product, variant = "default", size = "default",
   }
 
   if (variant === "icon") {
+
     return (
+      product.inStock &&
       <Button
         size="icon"
         variant="secondary"

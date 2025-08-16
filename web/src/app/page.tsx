@@ -255,7 +255,9 @@ export default function SofaLandingPage() {
 
           <div className="text-center mt-12">
             <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4">
-              View All Products
+              <Link href="/products">
+                View All Products
+              </Link>
             </Button>
           </div>
         </div>
