@@ -8,10 +8,11 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
 import { categories, colors, materials } from "@/lib/products"
+import { IFilters } from "@/lib/filter"
 
 interface ProductFiltersProps {
-  onFiltersChange: (filters: any) => void
-  activeFilters: any
+  onFiltersChange: (filters: IFilters) => void
+  activeFilters: IFilters
 }
 
 export function ProductFilters({ onFiltersChange, activeFilters }: ProductFiltersProps) {
@@ -201,7 +202,7 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
             <Checkbox
               id="inStock"
               checked={activeFilters.inStock}
-              onCheckedChange={(checked) => onFiltersChange({ ...activeFilters, inStock: checked })}
+              onCheckedChange={(checked) => onFiltersChange({ ...activeFilters, inStock: !checked })}
             />
             <label htmlFor="inStock" className="text-sm cursor-pointer">
               In Stock Only

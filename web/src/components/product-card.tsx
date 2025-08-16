@@ -2,10 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Star } from "lucide-react"
 import { WishlistButton } from "@/components/wishlist-button"
-import { ShoppingCart } from "lucide-react" // Declared the ShoppingCart variable
 import type { Product } from "@/lib/products"
 
 interface ProductCardProps {

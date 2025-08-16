@@ -10,13 +10,14 @@ import { ProductCard } from "@/components/product-card"
 import { ProductFilters } from "@/components/product-filters"
 import { products, sortOptions } from "@/lib/products"
 import { QuickWhatsAppActions } from "@/components/quick-whatsapp-actions"
+import { IFilters } from "@/lib/filter"
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [sortBy, setSortBy] = useState("featured")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [currentPage, setCurrentPage] = useState(1)
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<IFilters>({
     categories: [],
     colors: [],
     materials: [],
