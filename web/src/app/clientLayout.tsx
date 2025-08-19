@@ -8,7 +8,7 @@ import { WishlistToast } from "@/components/wishlist-toast"
 import { WishlistProvider, useWishlist } from "@/lib/wishlist-context"
 import type { ReactNode } from "react"
 import { NavBar } from "@/components/common/NavBar"
-import Footer from "@/components/common/Footer"
+import { Footer } from "@/components/common/Footer"
 
 function WishlistWrapper({ children }: { children: ReactNode }) {
   const { showToast, toastData, hideToast } = useWishlist()
