@@ -11,11 +11,12 @@ export const NavBar = () => {
                         <div className="w-10 h-10 bg-white-600 rounded-lg flex items-center justify-center">
                             <span className="text-white font-bold text-xl">🛋️</span>
                         </div>
-                        <span className="text-2xl font-bold text-gray-900">Cozy Sofas</span>
+                        <Link href='/'>
+                            <span className="text-2xl font-bold text-gray-900">Cozy Sofas</span></Link>
                     </div>
 
                     <nav className="hidden md:flex items-center space-x-8">
-                        <Link href="#home" className="text-gray-700 hover:text-green-800 transition-colors">
+                        <Link href="/" className="text-gray-700 hover:text-green-800 transition-colors">
                             Home
                         </Link>
                         <Link href="/products" className="text-gray-700 hover:text-green-800 transition-colors">
