@@ -4,7 +4,7 @@ import { Product } from "@/lib/products"
 import Image from "next/image"
 import { useState } from "react"
 import { Button } from "./ui/button"
-import { ChevronLeft, ChevronRight, MessageCircle, Phone, RotateCcw, Share2, Shield, Star, Truck } from "lucide-react"
+import { ChevronLeft, ChevronRight, MessageCircle, Phone, RotateCcw, Share2, Shield, Truck } from "lucide-react"
 import { Badge } from "./ui/badge"
 import { WishlistButton } from "./wishlist-button"
 

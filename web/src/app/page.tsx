@@ -8,17 +8,10 @@ import {
   Shield,
   Headphones,
   Heart,
-  MessageCircle,
-  Facebook,
-  Instagram,
-  Twitter,
-  Mail,
   Phone,
-  MapPin,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { WishlistCounter } from "@/components/wishlist-counter"
 import { WhatsAppShareButton } from "@/components/whatsapp-share-button"
 import { ProductCard } from "@/components/product-card"
 import { products } from "@/lib/products"
@@ -27,9 +20,6 @@ import { products } from "@/lib/products"
 export default function SofaLandingPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-
-
       {/* Hero Section */}
       <section id="home" className="py-20 bg-gradient-to-br">
         <div className="container mx-auto px-4">
@@ -219,9 +209,6 @@ export default function SofaLandingPage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-
     </div>
   )
 }
