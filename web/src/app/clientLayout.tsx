@@ -7,6 +7,8 @@ import "./globals.css"
 import { WishlistToast } from "@/components/wishlist-toast"
 import { WishlistProvider, useWishlist } from "@/lib/wishlist-context"
 import type { ReactNode } from "react"
+import { NavBar } from "@/components/common/NavBar"
+import Footer from "@/components/common/Footer"
 
 function WishlistWrapper({ children }: { children: ReactNode }) {
   const { showToast, toastData, hideToast } = useWishlist()
@@ -42,7 +44,11 @@ html {
       </head>
       <body>
         <WishlistProvider>
-          <WishlistWrapper>{children}</WishlistWrapper>
+          <WishlistWrapper>
+            <NavBar />
+            {children}
+            <Footer />
+          </WishlistWrapper>
         </WishlistProvider>
       </body>
     </html>

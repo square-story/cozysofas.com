@@ -99,17 +99,6 @@ export const ProductGallary = ({ product }: IProductGallary) => {
                 <div>
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
 
-                    <div className="flex items-center gap-4 mb-4">
-                        <div className="flex items-center">
-                            {[...Array(5)].map((_, i) => (
-                                <Star
-                                    key={i}
-                                    className={`w-5 h-5 ${i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
-                                        }`}
-                                />
-                            ))}
-                        </div>
-                    </div>
 
                     <div className="flex items-center gap-4 mb-6">
                         <span className="text-3xl font-bold text-amber-600">₹{product.price.toLocaleString()}</span>

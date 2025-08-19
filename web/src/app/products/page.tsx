@@ -74,9 +74,6 @@ export default function ProductsPage() {
       case "price-high":
         filtered.sort((a, b) => b.price - a.price)
         break
-      case "rating":
-        filtered.sort((a, b) => b.rating - a.rating)
-        break
       case "newest":
         filtered.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0))
         break

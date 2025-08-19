@@ -1,10 +1,11 @@
+import { fetchAPI } from "./api"
+
 export interface Product {
   id: string
   name: string
   description: string
   price: number
   originalPrice?: number
-  rating: number
   images: string[]
   category: string
   colors: string[]
@@ -20,6 +21,15 @@ export interface Product {
   features: string[]
 }
 
+const fetchProducts = async () => {
+  const response = await fetchAPI("products?populate=*");
+  return response.data;
+};
+
+const apiProducts = await fetchProducts();
+
+console.log("Fetched products:", apiProducts);
+
 export const products: Product[] = [
   {
     id: "1",
@@ -28,12 +38,11 @@ export const products: Product[] = [
       "Spacious L-shaped sectional perfect for large families. Features premium fabric upholstery and deep cushions for ultimate comfort.",
     price: 1299,
     originalPrice: 1599,
-    rating: 4.8,
     images: [
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
+      apiProducts[0]?.images[0]?.url || "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
+      apiProducts[0]?.images[1]?.url || "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
+      apiProducts[0]?.images[2]?.url || "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
+      apiProducts[0]?.images[3]?.url || "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
     ],
     category: "Sectional",
     colors: ["Gray", "Navy", "Beige"],
@@ -49,7 +58,8 @@ export const products: Product[] = [
     name: "Luxury Leather Recliner",
     description: "Premium Italian leather recliner with built-in massage function and USB charging ports.",
     price: 2199,
-    rating: 4.9, images: [
+    originalPrice: 3200,
+    images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
@@ -70,7 +80,7 @@ export const products: Product[] = [
     description: "Clean lines with sustainable materials. Perfect for small spaces and modern aesthetics.",
     price: 899,
     originalPrice: 1099,
-    rating: 4.6, images: [
+    images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
@@ -90,7 +100,7 @@ export const products: Product[] = [
     name: "Classic Chesterfield Sofa",
     description: "Timeless design with button-tufted leather and rolled arms. A statement piece for any living room.",
     price: 1899,
-    rating: 4.7,
+    originalPrice: 1599,
     images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT3-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT3-1024x683.jpg",
@@ -111,7 +121,8 @@ export const products: Product[] = [
     name: "Contemporary Modular Sofa",
     description: "Flexible modular design that adapts to your space. Mix and match pieces for custom configurations.",
     price: 1599,
-    rating: 4.5, images: [
+    originalPrice: 2200,
+    images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
@@ -131,7 +142,8 @@ export const products: Product[] = [
     name: "Vintage Velvet Armchair",
     description: "Luxurious velvet upholstery with brass accents. Perfect accent piece for any sophisticated interior.",
     price: 799,
-    rating: 4.4, images: [
+    originalPrice: 2900,
+    images: [
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
       "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
