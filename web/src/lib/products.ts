@@ -1,5 +1,3 @@
-import { fetchAPI } from "./api"
-
 export interface Product {
   id: string
   name: string
@@ -21,15 +19,6 @@ export interface Product {
   features: string[]
 }
 
-const fetchProducts = async () => {
-  const response = await fetchAPI("products?populate=*");
-  return response.data;
-};
-
-const apiProducts = await fetchProducts();
-
-console.log("Fetched products:", apiProducts);
-
 export const products: Product[] = [
   {
     id: "1",
@@ -39,10 +28,10 @@ export const products: Product[] = [
     price: 1299,
     originalPrice: 1599,
     images: [
-      apiProducts[0]?.images[0]?.url || "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      apiProducts[0]?.images[1]?.url || "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      apiProducts[0]?.images[2]?.url || "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      apiProducts[0]?.images[3]?.url || "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
+      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
+      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
+      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
+      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
     ],
     category: "Sectional",
     colors: ["Gray", "Navy", "Beige"],
