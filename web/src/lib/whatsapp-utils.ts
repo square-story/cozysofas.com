@@ -34,7 +34,7 @@ export function formatWishlistForWhatsApp(wishlistItems: Product[], userInfo: Us
     }
 
     message += `\n`
-    message += `   📏 Size: ${item.dimensions.width}"W × ${item.dimensions.height}"H × ${item.dimensions.depth}"D\n`
+    message += `   📏 Size: ${item.Dimensions.Width}"W × ${item.Dimensions.Height}"H × ${item.Dimensions.Depth}"D\n`
     message += `   🎨 Available Colors: ${item.colors.join(", ")}\n`
 
     if (!item.inStock) {
