@@ -14,7 +14,7 @@ interface IProductGallary {
 
 export const ProductGallary = ({ product }: IProductGallary) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-    const [selectedColor, setSelectedColor] = useState(product?.colors[0] || "")
+    const [selectedColor, setSelectedColor] = useState(product?.colors[0].name || "")
     const [quantity, setQuantity] = useState(1)
 
     return (
@@ -23,7 +23,7 @@ export const ProductGallary = ({ product }: IProductGallary) => {
             <div className="space-y-4">
                 <div className="relative aspect-square overflow-hidden rounded-lg bg-gray-100">
                     <Image
-                        src={product.images[selectedImageIndex] || "/placeholder.svg"}
+                        src={product.images[selectedImageIndex].url || "/placeholder.svg"}
                         alt={product.name}
                         fill
                         className="object-cover"
@@ -82,7 +82,7 @@ export const ProductGallary = ({ product }: IProductGallary) => {
                                     }`}
                             >
                                 <Image
-                                    src={image || "/placeholder.svg"}
+                                    src={image.url || "/placeholder.svg"}
                                     alt={`${product.name} ${index + 1}`}
                                     width={80}
                                     height={80}
@@ -116,14 +116,14 @@ export const ProductGallary = ({ product }: IProductGallary) => {
                     <div className="flex gap-2">
                         {product.colors.map((color) => (
                             <button
-                                key={color}
-                                onClick={() => setSelectedColor(color)}
-                                className={`px-4 py-2 rounded-lg border-2 text-sm ${selectedColor === color
+                                key={color.id}
+                                onClick={() => setSelectedColor(color.name)}
+                                className={`px-4 py-2 rounded-lg border-2 text-sm ${selectedColor === color.name
                                     ? "border-amber-600 bg-amber-50 text-amber-800"
                                     : "border-gray-200 hover:border-gray-300"
                                     }`}
                             >
-                                {color}
+                                {color.name}
                             </button>
                         ))}
                     </div>

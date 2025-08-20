@@ -13,7 +13,7 @@ import { ProductGallary } from "@/components/product-gallary"
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const product = products.find((p) => p.id === id)
+  const product = products.find((p) => p.id === Number(id))
 
   if (!product) {
     notFound()
@@ -62,7 +62,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                       {product.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-2">
                           <Check className="w-4 h-4 text-green-600" />
-                          {feature}
+                          {feature.name}
                         </li>
                       ))}
                     </ul>
@@ -81,15 +81,15 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span>Width:</span>
-                          <span>{product.dimensions.width}"</span>
+                          <span>{product.Dimensions.Width}"</span>
                         </div>
                         <div className="flex justify-between">
                           <span>Height:</span>
-                          <span>{product.dimensions.height}"</span>
+                          <span>{product.Dimensions.Height}"</span>
                         </div>
                         <div className="flex justify-between">
                           <span>Depth:</span>
-                          <span>{product.dimensions.depth}"</span>
+                          <span>{product.Dimensions.Depth || 'Not Found'}"</span>
                         </div>
                       </div>
                     </div>
@@ -98,7 +98,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                       <div className="space-y-1">
                         {product.materials.map((material, index) => (
                           <div key={index} className="text-sm">
-                            {material}
+                            {material.name}
                           </div>
                         ))}
                       </div>
@@ -141,7 +141,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                 <Card key={relatedProduct.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                   <Link href={`/products/${relatedProduct.id}`}>
                     <Image
-                      src={relatedProduct.images[0] || "/placeholder.svg"}
+                      src={relatedProduct.images[0].url || "/placeholder.svg"}
                       alt={relatedProduct.name}
                       width={300}
                       height={200}

@@ -39,17 +39,26 @@ export default function ProductsPage() {
       }
 
       // Category filter
-      if (filters.categories.length > 0 && !filters.categories.includes(product.category as never)) {
+      if (
+        filters.categories.length > 0 &&
+        !filters.categories.includes(product.category.name)
+      ) {
         return false
       }
 
       // Color filter
-      if (filters.colors.length > 0 && !product.colors.some((color) => filters.colors.includes(color as never))) {
+      if (
+        filters.colors.length > 0 &&
+        !product.colors.some((color) => filters.colors.includes(color.name))
+      ) {
         return false
       }
 
       // Material filter
-      if (filters.materials.length > 0 && !product.materials.some((material) => filters.materials.includes(material as never))) {
+      if (
+        filters.materials.length > 0 &&
+        !product.materials.some((material) => filters.materials.includes(material.name))
+      ) {
         return false
       }
 

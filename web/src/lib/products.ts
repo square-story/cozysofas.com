@@ -1,157 +1,131 @@
+import { fetchAPI } from "./api";
+
+export interface StrapiResponse<T> {
+  data: T[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
 export interface Product {
-  id: string
+  id: number
+  documentId: string
   name: string
   description: string
   price: number
   originalPrice?: number
-  images: string[]
-  category: string
-  colors: string[]
-  materials: string[]
-  dimensions: {
-    width: number
-    height: number
-    depth: number
-  }
   inStock: boolean
+  slug: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
   isNew: boolean
   isBestSeller: boolean
-  features: string[]
+  images: ProductImage[]
+  category: Category
+  colors: Color[]
+  materials: Material[]
+  Dimensions: Dimensions
+  features: Feature[]
 }
 
-export const products: Product[] = [
-  {
-    id: "1",
-    name: "Modern Sectional Sofa",
-    description:
-      "Spacious L-shaped sectional perfect for large families. Features premium fabric upholstery and deep cushions for ultimate comfort.",
-    price: 1299,
-    originalPrice: 1599,
-    images: [
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT6-683x1024.jpg",
-    ],
-    category: "Sectional",
-    colors: ["Gray", "Navy", "Beige"],
-    materials: ["Fabric", "Foam", "Wood Frame"],
-    dimensions: { width: 120, height: 35, depth: 85 },
-    inStock: true,
-    isNew: false,
-    isBestSeller: true,
-    features: ["Removable Cushions", "Stain Resistant", "Pet Friendly", "Easy Assembly"],
-  },
-  {
-    id: "2",
-    name: "Luxury Leather Recliner",
-    description: "Premium Italian leather recliner with built-in massage function and USB charging ports.",
-    price: 2199,
-    originalPrice: 3200,
-    images: [
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT9-683x1024.jpg",
-    ],
-    category: "Recliner",
-    colors: ["Brown", "Black", "Cognac"],
-    materials: ["Genuine Leather", "Memory Foam", "Steel Frame"],
-    dimensions: { width: 32, height: 42, depth: 38 },
-    inStock: true,
-    isNew: true,
-    isBestSeller: false,
-    features: ["Massage Function", "USB Charging", "360° Swivel", "Memory Foam"],
-  },
-  {
-    id: "3",
-    name: "Minimalist Fabric Loveseat",
-    description: "Clean lines with sustainable materials. Perfect for small spaces and modern aesthetics.",
-    price: 899,
-    originalPrice: 1099,
-    images: [
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT10-683x1024.jpg",
-    ],
-    category: "Loveseat",
-    colors: ["Light Gray", "Charcoal", "Cream"],
-    materials: ["Organic Cotton", "Recycled Foam", "Bamboo Frame"],
-    dimensions: { width: 58, height: 32, depth: 34 },
-    inStock: true,
-    isNew: false,
-    isBestSeller: false,
-    features: ["Eco-Friendly", "Compact Design", "Easy Clean", "Sustainable Materials"],
-  },
-  {
-    id: "4",
-    name: "Classic Chesterfield Sofa",
-    description: "Timeless design with button-tufted leather and rolled arms. A statement piece for any living room.",
-    price: 1899,
-    originalPrice: 1599,
-    images: [
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT3-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT3-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT3-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT3-1024x683.jpg",
-    ],
-    category: "Sofa",
-    colors: ["Dark Brown", "Black", "Burgundy"],
-    materials: ["Top Grain Leather", "High-Density Foam", "Hardwood Frame"],
-    dimensions: { width: 84, height: 30, depth: 38 },
-    inStock: true,
-    isNew: false,
-    isBestSeller: true,
-    features: ["Button Tufted", "Rolled Arms", "Nailhead Trim", "Handcrafted"],
-  },
-  {
-    id: "5",
-    name: "Contemporary Modular Sofa",
-    description: "Flexible modular design that adapts to your space. Mix and match pieces for custom configurations.",
-    price: 1599,
-    originalPrice: 2200,
-    images: [
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT13-1024x683.jpg",
-    ],
-    category: "Modular",
-    colors: ["White", "Light Gray", "Navy"],
-    materials: ["Performance Fabric", "CertiPUR Foam", "Kiln-Dried Wood"],
-    dimensions: { width: 96, height: 33, depth: 40 },
-    inStock: false,
-    isNew: true,
-    isBestSeller: false,
-    features: ["Modular Design", "Washable Covers", "Pet Resistant", "Custom Configuration"],
-  },
-  {
-    id: "6",
-    name: "Vintage Velvet Armchair",
-    description: "Luxurious velvet upholstery with brass accents. Perfect accent piece for any sophisticated interior.",
-    price: 799,
-    originalPrice: 2900,
-    images: [
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
-      "https://asembleindia.com/wp-content/uploads/2024/08/PRODUCT16-1024x683.jpg",
-    ],
-    category: "Armchair",
-    colors: ["Emerald", "Navy", "Blush Pink"],
-    materials: ["Velvet", "Down Feathers", "Brass Legs"],
-    dimensions: { width: 30, height: 32, depth: 32 },
-    inStock: true,
-    isNew: false,
-    isBestSeller: false,
-    features: ["Velvet Upholstery", "Brass Accents", "Down Cushions", "Swivel Base"],
-  },
-]
+export interface ProductImage {
+  id: number
+  documentId: string
+  name: string
+  alternativeText: string | null
+  caption: string | null
+  width: number
+  height: number
+  formats: {
+    thumbnail: ImageFormat
+  }
+  hash: string
+  ext: string
+  mime: string
+  size: number
+  url: string
+  previewUrl: string | null
+  provider: string
+  provider_metadata: {
+    public_id: string
+    resource_type: string
+  }
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
 
-export const categories = ["All", "Sofa", "Sectional", "Loveseat", "Recliner", "Armchair", "Modular"]
-export const colors = ["All", "Gray", "Navy", "Beige", "Brown", "Black", "White", "Cream"]
-export const materials = ["All", "Fabric", "Leather", "Velvet", "Cotton"]
+export interface ImageFormat {
+  ext: string
+  url: string
+  hash: string
+  mime: string
+  name: string
+  path: string | null
+  size: number
+  width: number
+  height: number
+  sizeInBytes: number
+  provider_metadata: {
+    public_id: string
+    resource_type: string
+  }
+}
+
+export interface Category {
+  id: number
+  documentId: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+export interface Color {
+  id: number
+  documentId: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+export interface Material {
+  id: number
+  documentId: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+export interface Dimensions {
+  id: number
+  Width: number
+  Height: number
+  Depth: number
+}
+
+export interface Feature {
+  id: number
+  documentId: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+export const products = await fetchAPI<Product>('products?populate=*').then(res => res.data)
+
+export const categories = await fetchAPI<Category>('categories').then(res => res.data).then(res => res.map(category => category.name))
+export const colors = await fetchAPI<Color>('colors').then(res => res.data).then(res => res.map(color => color.name))
+export const materials = await fetchAPI<Material>('materials').then(res => res.data).then(res => res.map(material => material.name))
 export const sortOptions = [
   { value: "featured", label: "Featured" },
   { value: "price-low", label: "Price: Low to High" },

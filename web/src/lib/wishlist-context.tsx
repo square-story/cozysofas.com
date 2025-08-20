@@ -6,8 +6,8 @@ import type { Product } from "@/lib/products"
 interface WishlistContextType {
   wishlistItems: Product[]
   addToWishlist: (product: Product) => void
-  removeFromWishlist: (productId: string) => void
-  isInWishlist: (productId: string) => boolean
+  removeFromWishlist: (productId: number) => void
+  isInWishlist: (productId: number) => boolean
   clearWishlist: () => void
   wishlistCount: number
   showToast: boolean
@@ -68,7 +68,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
-  const removeFromWishlist = (productId: string) => {
+  const removeFromWishlist = (productId: number) => {
     setWishlistItems((prev) => {
       const product = prev.find((item) => item.id === productId)
       if (product) {
@@ -79,7 +79,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
-  const isInWishlist = (productId: string) => {
+  const isInWishlist = (productId: number) => {
     return wishlistItems.some((item) => item.id === productId)
   }
 

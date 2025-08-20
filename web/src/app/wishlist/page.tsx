@@ -101,7 +101,7 @@ export default function WishlistPage() {
               <div className="relative overflow-hidden">
                 <Link href={`/products/${product.id}`}>
                   <Image
-                    src={product.images[0] || "/placeholder.svg"}
+                    src={product.images[0].url || "/placeholder.svg"}
                     alt={product.name}
                     width={400}
                     height={300}
