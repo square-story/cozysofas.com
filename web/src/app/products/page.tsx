@@ -86,7 +86,7 @@ export default function ProductsPage() {
     }
 
     return filtered
-  }, [products, searchQuery, sortBy, filters])
+  }, [searchQuery, sortBy, filters])
 
   const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage)
   const paginatedProducts = filteredAndSortedProducts.slice(
