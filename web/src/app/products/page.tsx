@@ -18,11 +18,12 @@ export default function ProductsPage() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(true)
+  const [maxPrice, setMaxPrice] = useState(0)
   const [filters, setFilters] = useState<IFilters>({
     categories: [],
     colors: [],
     materials: [],
-    priceRange: [0, 3000],
+    priceRange: [0, maxPrice],
     inStock: false,
   })
 
@@ -37,6 +38,14 @@ export default function ProductsPage() {
           getColorsData(),
           getMaterialsData()
         ]);
+
+        const maxPrice = Math.max(...productsData.map(product => product.price));
+        const roundedMaxPrice = Math.ceil(maxPrice / 1000) * 1000;
+        setMaxPrice(roundedMaxPrice);
+        setFilters({
+          ...filters,
+          priceRange: [0, roundedMaxPrice],
+        });
         
        
         Object.assign(products, productsData);

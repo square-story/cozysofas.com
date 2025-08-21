@@ -7,7 +7,7 @@ import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
-import { categories, Category, Color, colors, Material, materials, getCategoriesData, getColorsData, getMaterialsData } from "@/lib/products"
+import { categories, Category, Color, colors, Material, materials, getCategoriesData, getColorsData, getMaterialsData, getProductsData, Product } from "@/lib/products"
 import { IFilters } from "@/lib/filter"
 
 interface ProductFiltersProps {
@@ -16,23 +16,32 @@ interface ProductFiltersProps {
 }
 
 export function ProductFilters({ onFiltersChange, activeFilters }: ProductFiltersProps) {
-  const [priceRange, setPriceRange] = useState([0, 3000])
+  const [priceRange, setPriceRange] = useState([0, 0])
+  const [maxPrice, setMaxPrice] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
+  const [products] = useState<Product[]>([])
   
   // Fetch data when component mounts
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const [categoriesData, colorsData, materialsData] = await Promise.all([
+        const [categoriesData, productsData, colorsData, materialsData] = await Promise.all([
           getCategoriesData(),
+          getProductsData(),
           getColorsData(),
           getMaterialsData()
         ]);
+        const maxPrice = Math.max(...productsData.map(product => product.price));
+        const roundedMaxPrice = Math.ceil(maxPrice / 1000) * 1000;
+        setPriceRange([0, roundedMaxPrice]);
+        setMaxPrice(roundedMaxPrice);
         
         Object.assign(categories, categoriesData);
+        Object.assign(products, productsData);
         Object.assign(colors, colorsData);
         Object.assign(materials, materialsData);
+        
       } catch (error) {
         console.error("Error fetching filter data:", error);
       } finally {
@@ -73,12 +82,12 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
   }
 
   const clearAllFilters = () => {
-    setPriceRange([0, 3000])
+    setPriceRange([0, 0])
     onFiltersChange({
       categories: [],
       colors: [],
       materials: [],
-      priceRange: [0, 3000],
+      priceRange: [0, 0],
       inStock: false,
     })
   }
@@ -136,7 +145,7 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
           <Slider
             value={priceRange}
             onValueChange={handlePriceChange}
-            max={3000}
+            max={maxPrice}
             min={0}
             step={50}
             className="w-full"
