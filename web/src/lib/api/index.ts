@@ -1,7 +1,7 @@
 import { StrapiResponse } from "../products";
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
+const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_TOKEN || '';
 
 type FetchOptions = {
     cache?: RequestCache;
@@ -17,9 +17,9 @@ export async function fetchAPI<T>(endpoint: string, options?: FetchOptions): Pro
 
         const res = await fetch(`${STRAPI_URL}/api/${endpoint}`, {
             headers: {
-                Authorization: `Bearer ${STRAPI_TOKEN}`
+                Authorization: STRAPI_TOKEN ? `Bearer ${STRAPI_TOKEN}` : '',
             },
-            cache: options?.cache || "force-cache", // Default to caching
+            cache: options?.cache || "no-cache", // Default to no cache
             next: {
                 revalidate: options?.revalidate !== undefined ? options.revalidate : 60, // Default 60 seconds
                 tags: options?.tags,
