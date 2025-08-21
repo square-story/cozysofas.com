@@ -29,7 +29,7 @@ export default function SofaLandingPage() {
       setIsLoading(true);
       try {
         const productsData = await getProductsData();
-        
+
         // Update the exported variable
         Object.assign(products, productsData);
       } catch (error) {
@@ -224,14 +224,22 @@ export default function SofaLandingPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <WhatsAppShareButton size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8 py-4" />
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-green-800 px-8 py-4 bg-transparent"
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                Call Now: {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}
-              </Button>
+              <button className="group relative flex h-[45px] w-[45px] items-center justify-start overflow-hidden rounded-full bg-blue-600 shadow-md transition-all duration-300 hover:w-[150px] hover:rounded-[40px] active:translate-x-[2px] active:translate-y-[2px]">
+                <div className="flex w-full items-center justify-center transition-all duration-300 group-hover:w-[30%] group-hover:pl-2">
+                  <svg
+                    className="w-[25px]"
+                    fill="white"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6.62 10.79a15.464 15.464 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.59.1.35.03.73-.24 1.01l-2.21 2.19z" />
+                  </svg>
+                </div>
+
+                
+                <div className="absolute right-0 w-0 opacity-0 text-white text-xs font-semibold transition-all duration-300 group-hover:w-[70%] group-hover:pr-2 group-hover:opacity-100">
+                  {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}
+                </div>
+              </button>
             </div>
 
             <div className="flex items-center justify-center space-x-8 pt-8 text-sm opacity-80">

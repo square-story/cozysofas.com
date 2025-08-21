@@ -44,32 +44,32 @@ Looking forward to hearing from you!`
     <Card className="bg-green-50 border-green-200">
       <CardContent className="p-6">
         <div className="text-center mb-4">
-          <MessageCircle className="w-8 h-8 text-green-600 mx-auto mb-2" />
+          <MessageCircle className="w-11 h-11 text-green-600 mx-auto mb-2" />
           <h3 className="text-lg font-semibold text-gray-900">Quick WhatsApp Actions</h3>
           <p className="text-sm text-gray-600">Get instant help from our furniture experts</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-2">
+        <div className="grid sm:grid-cols-2 gap-3">
+          {/* General Inquiry */}
           <Button
             variant="outline"
             onClick={handleQuickInquiry}
-            className="bg-white border-green-200 text-green-700 hover:bg-green-50"
+            className="group flex items-center justify-center gap-2 rounded-xl border-2 border-green-200 bg-white px-5 py-3 text-green-700 transition-all duration-300 hover:border-green-400 hover:bg-green-50 hover:shadow-md active:scale-95"
           >
-            <MessageCircle className="w-2 h-2 mr-0" />
-            General Inquiry
+            <span className="font-medium">General Inquiry</span>
           </Button>
 
+          {/* Custom Design */}
           <Button
             variant="outline"
             onClick={handleCustomDesign}
-            className="bg-white border-green-200 text-green-700 hover:bg-green-50"
+            className="group flex items-center justify-center gap-2 rounded-xl border-2 border-green-200 bg-white px-5 py-3 text-green-700 transition-all duration-300 hover:border-green-400 hover:bg-green-50 hover:shadow-md active:scale-95"
           >
-            <Phone className="w-2 h-2 mr-0" />
-            Custom Design
+            <span className="font-medium">Custom Design</span>
           </Button>
         </div>
 
-        <div className="mt-4 pt-4 border-t border-green-200">
+        <div className="mt-4 flex items-center justify-center pt-4 border-t border-green-200">
           <WhatsAppShareButton className="w-full" showItemCount={true} />
         </div>
 
