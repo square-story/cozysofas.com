@@ -118,7 +118,7 @@ function HomeClient() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredCategories.map((category) => (
-                <a 
+                <Link
                   key={category.id} 
                   href={`/products?category=${category.id}`}
                   className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
@@ -138,7 +138,7 @@ function HomeClient() {
                       Browse collection
                     </p>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           )}
@@ -167,8 +167,8 @@ function HomeClient() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredProducts.map((product) => (
                 <Link 
-                  key={product.id} 
-                  href={`/products/${product.id}`}
+                  key={product.slug} 
+                  href={`/products/${product.slug}`}
                   className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 >
                   <div className="h-64 overflow-hidden">

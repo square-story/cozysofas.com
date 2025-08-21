@@ -12,10 +12,10 @@ import { Product } from "@/lib/products"
 import Image from "next/image"
 
 // Server Component
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const productId = parseInt(params.id, 10)
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const productSlug = params.slug
   
-  if (isNaN(productId)) {
+  if (!productSlug) {
     notFound()
   }
   
@@ -23,8 +23,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
     // Prefetch product and related products data
     const dehydratedState = await prefetchQueries([
       {
-        queryKey: queryKeys.product(productId),
-        queryFn: () => getProduct(productId),
+        queryKey: queryKeys.product(productSlug),
+        queryFn: () => getProduct(productSlug),
       },
       {
         queryKey: queryKeys.products,
@@ -35,7 +35,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     return (
       <Hydrate state={dehydratedState}>
         <Suspense fallback={<ProductDetailSkeleton />}>
-          <ProductDetail productId={productId} />
+          <ProductDetail productSlug={productSlug} />
         </Suspense>
       </Hydrate>
     )
@@ -46,9 +46,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
 }
 
 // Client Component
-function ProductDetail({ productId }: { productId: number }) {
+function ProductDetail({ productSlug }: { productSlug: string }) {
   // Use React Query hooks
-  const productQuery = useProduct(productId)
+  const productQuery = useProduct(productSlug)
   const productsQuery = useProducts()
   
   // Handle loading and error states
@@ -74,14 +74,14 @@ function ProductDetail({ productId }: { productId: number }) {
   const relatedProducts = getRelatedProducts(product, productsQuery.data || [])
   
   // Check if product is in wishlist
-  const inWishlist = isInWishlist(product.id)
+  const inWishlist = isInWishlist(product.slug)
   
   // Handle wishlist toggle
   const handleWishlistToggle = () => {
     if (inWishlist) {
-      removeFromWishlist(product.id)
+      removeFromWishlist(product.slug)
     } else {
-      addToWishlist(product.id, product)
+      addToWishlist(product.slug, product)
     }
   }
   
@@ -195,13 +195,13 @@ function ProductDetail({ productId }: { productId: number }) {
 // Related Product Card
 function RelatedProductCard({ product }: { product: Product }) {
   return (
-    <a 
-      href={`/products/${product.id}`}
+    <Link
+      href={`/products/${product.slug}`}
       className="group block border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
     >
       <div className="aspect-square overflow-hidden">
         <Image 
-          src={product.images?.[0]?.formats?.thumbnail?.url || `/images/products/${product.id}.jpg`} 
+          src={product.images?.[0]?.formats?.thumbnail?.url || `/images/products/${product.slug}.jpg`} 
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           width={200}
@@ -213,7 +213,7 @@ function RelatedProductCard({ product }: { product: Product }) {
         <p className="text-muted-foreground text-sm truncate">{product.category?.name}</p>
         <p className="font-semibold mt-2">${product.price.toFixed(2)}</p>
       </div>
-    </a>
+    </Link>
   )
 }
 

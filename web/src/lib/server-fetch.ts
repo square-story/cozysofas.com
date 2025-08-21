@@ -17,15 +17,15 @@ export async function getProducts() {
   }
 }
 
-export async function getProduct(id: number) {
+export async function getProduct(slug: string) {
   try {
-    const response = await fetchAPI<Product>(`products/${id}?populate=*`, {
+    const response = await fetchAPI<Product>(`products/${slug}?populate=*`, {
       revalidate: 60,
-      tags: [`product-${id}`, "products"],
+      tags: [`product-${slug}`, "products"],
     });
     return response.data[0];
   } catch (error) {
-    console.error(`Error fetching product ${id}:`, error);
+    console.error(`Error fetching product ${slug}:`, error);
     return null;
   }
 }

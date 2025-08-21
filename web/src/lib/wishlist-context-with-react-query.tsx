@@ -17,16 +17,16 @@ const toast = (props: ToastProps) => {
 }
 
 type WishlistContextType = {
-  wishlist: number[]
-  addToWishlist: (productId: number, product?: Product) => void
-  removeFromWishlist: (productId: number) => void
-  isInWishlist: (productId: number) => boolean
+  wishlist: string[]
+  addToWishlist: (productSlug: string, product?: Product) => void
+  removeFromWishlist: (productSlug: string) => void
+  isInWishlist: (productSlug: string) => boolean
 }
 
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined)
 
 export function WishlistProvider({ children }: { children: React.ReactNode }) {
-  const [wishlist, setWishlist] = useState<number[]>([])
+  const [wishlist, setWishlist] = useState<string[]>([])
   const queryClient = useQueryClient()
 
   // Load wishlist from localStorage on mount
@@ -48,11 +48,11 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   }, [wishlist])
 
   // Add product to wishlist with optimistic updates
-  const addToWishlist = (productId: number, product?: Product) => {
-    if (wishlist.includes(productId)) return
+  const addToWishlist = (productSlug: string, product?: Product) => {
+    if (wishlist.includes(productSlug)) return
     
     // Optimistic update
-    setWishlist((prev) => [...prev, productId])
+    setWishlist((prev) => [...prev, productSlug])
     
     // Update React Query cache if product data is provided
     if (product) {
@@ -67,7 +67,7 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
       
       // Update single product cache
       queryClient.setQueryData<Product>(
-        queryKeys.product(productId),
+        queryKeys.product(productSlug),
         (oldData) => {
           if (!oldData) return undefined
           return { ...oldData, isInWishlist: true }
@@ -82,23 +82,23 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   }
 
   // Remove product from wishlist with optimistic updates
-  const removeFromWishlist = (productId: number) => {
-    if (!wishlist.includes(productId)) return
+  const removeFromWishlist = (productSlug: string) => {
+    if (!wishlist.includes(productSlug)) return
     
     // Optimistic update
-    setWishlist((prev) => prev.filter((id) => id !== productId))
+    setWishlist((prev) => prev.filter((id) => id !== productSlug))
     
     // Update React Query cache
     queryClient.setQueryData<Product[]>(
       queryKeys.products,
       (oldData) => {
         if (!oldData) return undefined
-        return oldData.map(p => p.id === productId ? { ...p, isInWishlist: false } : p)
+        return oldData.map(p => p.slug === productSlug ? { ...p, isInWishlist: false } : p)
       }
     )
     
     queryClient.setQueryData<Product>(
-      queryKeys.product(productId),
+      queryKeys.product(productSlug),
       (oldData) => {
         if (!oldData) return undefined
         return { ...oldData, isInWishlist: false }
@@ -112,8 +112,8 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   }
 
   // Check if product is in wishlist
-  const isInWishlist = (productId: number) => {
-    return wishlist.includes(productId)
+  const isInWishlist = (productSlug: string) => {
+    return wishlist.includes(productSlug)
   }
 
   return (
@@ -147,7 +147,7 @@ export function useWishlistProducts() {
   const allProducts = queryClient.getQueryData<Product[]>(queryKeys.products) || []
   
   // Filter products in wishlist
-  const wishlistProducts = allProducts.filter(product => wishlist.includes(product.id))
+  const wishlistProducts = allProducts.filter(product => wishlist.includes(product.slug))
   
   return wishlistProducts
 }

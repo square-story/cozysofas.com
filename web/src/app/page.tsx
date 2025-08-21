@@ -1,4 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client"
+
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -14,10 +17,31 @@ import Image from "next/image"
 import Link from "next/link"
 import { WhatsAppShareButton } from "@/components/whatsapp-share-button"
 import { ProductCard } from "@/components/product-card"
-import { products } from "@/lib/products"
+import { products, getProductsData } from "@/lib/products"
 
 
 export default function SofaLandingPage() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch products data when component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const productsData = await getProductsData();
+        
+        // Update the exported variable
+        Object.assign(products, productsData);
+      } catch (error) {
+        console.error("Error fetching products data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -155,9 +179,27 @@ export default function SofaLandingPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.slice(0, 3).map(item => (
-              <ProductCard product={item} key={item.id} />
-            ))}
+            {isLoading ? (
+              // Loading skeleton for products
+              Array(3).fill(0).map((_, index) => (
+                <Card key={index} className="overflow-hidden">
+                  <div className="w-full h-64 bg-gray-200 animate-pulse" />
+                  <CardContent className="p-4 space-y-3">
+                    <div className="h-6 bg-gray-200 rounded animate-pulse" />
+                    <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4" />
+                    <div className="h-8 bg-gray-200 rounded animate-pulse w-1/3 mt-2" />
+                  </CardContent>
+                </Card>
+              ))
+            ) : products.length > 0 ? (
+              products.slice(0, 3).map(item => (
+                <ProductCard product={item} key={item.id} />
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12">
+                <p className="text-gray-500">No products available at the moment.</p>
+              </div>
+            )}
           </div>
 
           <div className="text-center mt-12">

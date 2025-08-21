@@ -9,7 +9,6 @@ import { WishlistProvider, useWishlist } from "@/lib/wishlist-context"
 import type { ReactNode } from "react"
 import { NavBar } from "@/components/common/NavBar"
 import { Footer } from "@/components/common/Footer"
-import { QueryProvider } from "@/lib/query-provider"
 
 function WishlistWrapper({ children }: { children: ReactNode }) {
   const { showToast, toastData, hideToast } = useWishlist()
@@ -44,15 +43,13 @@ html {
         `}</style>
       </head>
       <body>
-        <QueryProvider>
-          <WishlistProvider>
-            <WishlistWrapper>
-              <NavBar />
-              {children}
-              <Footer />
-              </WishlistWrapper>
-            </WishlistProvider>
-          </QueryProvider>
+        <WishlistProvider>
+          <WishlistWrapper>
+            <NavBar />
+            {children}
+            <Footer />
+          </WishlistWrapper>
+        </WishlistProvider>
       </body>
     </html>
   )

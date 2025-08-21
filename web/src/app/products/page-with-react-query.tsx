@@ -7,6 +7,7 @@ import { useQueryState } from "@/lib/hooks/use-query-state"
 import { ErrorState } from "@/lib/hooks/use-query-state"
 import { Product, Category, Color, Material } from "@/lib/products"
 import Image from "next/image"
+import Link from "next/link"
 
 // Server Component
 export default async function ProductsPage({ searchParams }: { searchParams: Record<string, string> }) {
@@ -429,8 +430,8 @@ function ProductsClient({ searchParams }: { searchParams: Record<string, string>
 // Product Card Component
 function ProductCard({ product }: { product: Product }) {
   return (
-    <a 
-      href={`/products/${product.id}`}
+    <Link 
+      href={`/products/${product.slug}`}
       className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
     >
       <div className="h-64 overflow-hidden">
@@ -454,7 +455,7 @@ function ProductCard({ product }: { product: Product }) {
           )}
         </div>
       </div>
-    </a>
+    </Link>
   )
 }
 

@@ -5,7 +5,7 @@ import type { Product, Category, Color, Material } from "../products";
 // Query keys for caching and invalidation
 export const queryKeys = {
   products: ["products"] as const,
-  product: (id: number) => ["products", id] as const,
+  product: (slug: string) => ["products", slug] as const,
   categories: ["categories"] as const,
   colors: ["colors"] as const,
   materials: ["materials"] as const,
@@ -23,14 +23,14 @@ export function useProducts() {
 }
 
 // Hook for fetching a single product by ID
-export function useProduct(id: number) {
+export function useProduct(slug: string) {
   return useQuery({
-    queryKey: queryKeys.product(id),
+    queryKey: queryKeys.product(slug),
     queryFn: async () => {
-      const response = await fetchAPI<Product>(`products/${id}?populate=*`);
+      const response = await fetchAPI<Product>(`products/${slug}?populate=*`);
       return response.data[0]; // Assuming the API returns an array with a single product
     },
-    enabled: !!id, // Only run the query if an ID is provided
+    enabled: !!slug, // Only run the query if an ID is provided
   });
 }
 

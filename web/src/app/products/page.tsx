@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
@@ -8,7 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Search, Filter, Grid, List } from "lucide-react"
 import { ProductCard } from "@/components/product-card"
 import { ProductFilters } from "@/components/product-filters"
-import { products, sortOptions } from "@/lib/products"
+import { products, categories, colors, materials, sortOptions, getProductsData, getCategoriesData, getColorsData, getMaterialsData } from "@/lib/products"
 import { QuickWhatsAppActions } from "@/components/quick-whatsapp-actions"
 import { IFilters } from "@/lib/filter"
 
@@ -17,6 +17,7 @@ export default function ProductsPage() {
   const [sortBy, setSortBy] = useState("featured")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [currentPage, setCurrentPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState<IFilters>({
     categories: [],
     colors: [],
@@ -25,9 +26,41 @@ export default function ProductsPage() {
     inStock: false,
   })
 
+  // Fetch data when component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const [productsData, categoriesData, colorsData, materialsData] = await Promise.all([
+          getProductsData(),
+          getCategoriesData(),
+          getColorsData(),
+          getMaterialsData()
+        ]);
+        
+        // Update the exported variables
+        Object.assign(products, productsData);
+        Object.assign(categories, categoriesData);
+        Object.assign(colors, colorsData);
+        Object.assign(materials, materialsData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const itemsPerPage = 12
 
   const filteredAndSortedProducts = useMemo(() => {
+    // Return empty array if products haven't loaded yet
+    if (isLoading || products.length === 0) {
+      return [];
+    }
+    
     const filtered = products.filter((product) => {
       // Search filter
       if (
@@ -95,7 +128,7 @@ export default function ProductsPage() {
     }
 
     return filtered
-  }, [searchQuery, sortBy, filters])
+  }, [searchQuery, sortBy, filters, isLoading])
 
   const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage)
   const paginatedProducts = filteredAndSortedProducts.slice(
@@ -195,7 +228,17 @@ export default function ProductsPage() {
             </div>
 
             {/* Products Grid */}
-            {paginatedProducts.length > 0 ? (
+            {isLoading ? (
+              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+                {Array.from({ length: 9 }).map((_, index) => (
+                  <div key={index} className="animate-pulse">
+                    <div className="bg-gray-200 h-64 rounded-lg mb-2"></div>
+                    <div className="bg-gray-200 h-4 rounded w-3/4 mb-2"></div>
+                    <div className="bg-gray-200 h-4 rounded w-1/2"></div>
+                  </div>
+                ))}
+              </div>
+            ) : paginatedProducts.length > 0 ? (
               <div
                 className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1"
                   }`}

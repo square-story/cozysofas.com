@@ -121,11 +121,17 @@ export interface Feature {
 
 import { getProducts, getCategories, getColors, getMaterials } from "./server-fetch";
 
-// Export data fetched on the server for backward compatibility
-export const products = await getProducts();
-export const categories = await getCategories();
-export const colors = await getColors();
-export const materials = await getMaterials();
+// Export functions instead of using top-level await
+export const getProductsData = () => getProducts();
+export const getCategoriesData = () => getCategories();
+export const getColorsData = () => getColors();
+export const getMaterialsData = () => getMaterials();
+
+// Initialize with empty arrays that will be populated when functions are called
+export const products: Product[] = [];
+export const categories: Category[] = [];
+export const colors: Color[] = [];
+export const materials: Material[] = [];
 export const sortOptions = [
   { value: "featured", label: "Featured" },
   { value: "price-low", label: "Price: Low to High" },

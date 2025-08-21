@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
-import { categories, Category, Color, colors, Material, materials } from "@/lib/products"
+import { categories, Category, Color, colors, Material, materials, getCategoriesData, getColorsData, getMaterialsData } from "@/lib/products"
 import { IFilters } from "@/lib/filter"
 
 interface ProductFiltersProps {
@@ -17,6 +17,32 @@ interface ProductFiltersProps {
 
 export function ProductFilters({ onFiltersChange, activeFilters }: ProductFiltersProps) {
   const [priceRange, setPriceRange] = useState([0, 3000])
+  const [isLoading, setIsLoading] = useState(true)
+  
+  // Fetch data when component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const [categoriesData, colorsData, materialsData] = await Promise.all([
+          getCategoriesData(),
+          getColorsData(),
+          getMaterialsData()
+        ]);
+        
+        // Update the exported variables
+        Object.assign(categories, categoriesData);
+        Object.assign(colors, colorsData);
+        Object.assign(materials, materialsData);
+      } catch (error) {
+        console.error("Error fetching filter data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleCategoryChange = (category: Category) => {
     const newCategories = activeFilters.categories.includes(category)
@@ -129,7 +155,15 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
           <CardTitle className="text-base">Category</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          {categories
+          {isLoading ? (
+            // Loading skeleton for categories
+            Array.from({ length: 5 }).map((_, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <div className="h-4 w-4 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            ))
+          ) : categories
             .filter((c) => c.name !== "All")
             .map((category) => (
               <div key={category.name} className="flex items-center space-x-2">
@@ -152,7 +186,15 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
           <CardTitle className="text-base">Colors</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          {colors
+          {isLoading ? (
+            // Loading skeleton for colors
+            Array.from({ length: 5 }).map((_, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <div className="h-4 w-4 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            ))
+          ) : colors
             .filter((c) => c.name !== "All")
             .map((color) => (
               <div key={color.name} className="flex items-center space-x-2">
@@ -175,7 +217,15 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
           <CardTitle className="text-base">Materials</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          {materials
+          {isLoading ? (
+            // Loading skeleton for materials
+            Array.from({ length: 5 }).map((_, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <div className="h-4 w-4 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            ))
+          ) : materials
             .filter((m) => m.name !== "All")
             .map((material) => (
               <div key={material.name} className="flex items-center space-x-2">
