@@ -1,5 +1,3 @@
-import { fetchAPI } from "./api";
-
 export interface StrapiResponse<T> {
   data: T[];
   meta: {
@@ -121,11 +119,13 @@ export interface Feature {
   publishedAt: string
 }
 
-export const products = await fetchAPI<Product>('products?populate=*').then(res => res.data)
+import { getProducts, getCategories, getColors, getMaterials } from "./server-fetch";
 
-export const categories = await fetchAPI<Category>('categories').then(res => res.data).then(res => res.map(category => category.name))
-export const colors = await fetchAPI<Color>('colors').then(res => res.data).then(res => res.map(color => color.name))
-export const materials = await fetchAPI<Material>('materials').then(res => res.data).then(res => res.map(material => material.name))
+// Export data fetched on the server for backward compatibility
+export const products = await getProducts();
+export const categories = await getCategories();
+export const colors = await getColors();
+export const materials = await getMaterials();
 export const sortOptions = [
   { value: "featured", label: "Featured" },
   { value: "price-low", label: "Price: Low to High" },

@@ -41,7 +41,7 @@ export default function ProductsPage() {
       // Category filter
       if (
         filters.categories.length > 0 &&
-        !filters.categories.includes(product.category.name)
+        !filters.categories.some(category => category.name === product.category.name)
       ) {
         return false
       }
@@ -49,7 +49,7 @@ export default function ProductsPage() {
       // Color filter
       if (
         filters.colors.length > 0 &&
-        !product.colors.some((color) => filters.colors.includes(color.name))
+        !product.colors.some((color) => color.name === product.category.name)
       ) {
         return false
       }
@@ -57,7 +57,7 @@ export default function ProductsPage() {
       // Material filter
       if (
         filters.materials.length > 0 &&
-        !product.materials.some((material) => filters.materials.includes(material.name))
+        !product.materials.some((material) => material.name === product.category.name)
       ) {
         return false
       }

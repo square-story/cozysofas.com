@@ -7,7 +7,7 @@ import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
-import { categories, colors, materials } from "@/lib/products"
+import { categories, Category, Color, colors, Material, materials } from "@/lib/products"
 import { IFilters } from "@/lib/filter"
 
 interface ProductFiltersProps {
@@ -18,25 +18,25 @@ interface ProductFiltersProps {
 export function ProductFilters({ onFiltersChange, activeFilters }: ProductFiltersProps) {
   const [priceRange, setPriceRange] = useState([0, 3000])
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (category: Category) => {
     const newCategories = activeFilters.categories.includes(category)
-      ? activeFilters.categories.filter((c: string) => c !== category)
+      ? activeFilters.categories.filter((c: Category) => c !== category)
       : [...activeFilters.categories, category]
 
     onFiltersChange({ ...activeFilters, categories: newCategories })
   }
 
-  const handleColorChange = (color: string) => {
+  const handleColorChange = (color: Color) => {
     const newColors = activeFilters.colors.includes(color)
-      ? activeFilters.colors.filter((c: string) => c !== color)
+      ? activeFilters.colors.filter((c: Color) => c !== color)
       : [...activeFilters.colors, color]
 
     onFiltersChange({ ...activeFilters, colors: newColors })
   }
 
-  const handleMaterialChange = (material: string) => {
+  const handleMaterialChange = (material: Material) => {  
     const newMaterials = activeFilters.materials.includes(material)
-      ? activeFilters.materials.filter((m: string) => m !== material)
+      ? activeFilters.materials.filter((m: Material) => m !== material)
       : [...activeFilters.materials, material]
 
     onFiltersChange({ ...activeFilters, materials: newMaterials })
@@ -81,21 +81,21 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
       {/* Active Filters */}
       {getActiveFilterCount() > 0 && (
         <div className="flex flex-wrap gap-2">
-          {activeFilters.categories.map((category: string) => (
-            <Badge key={category} variant="secondary" className="flex items-center gap-1">
-              {category}
+          {activeFilters.categories.map((category: Category) => (
+            <Badge key={category.name} variant="secondary" className="flex items-center gap-1">
+              {category.name}
               <X className="w-3 h-3 cursor-pointer" onClick={() => handleCategoryChange(category)} />
             </Badge>
           ))}
-          {activeFilters.colors.map((color: string) => (
-            <Badge key={color} variant="secondary" className="flex items-center gap-1">
-              {color}
+          {activeFilters.colors.map((color: Color) => (
+            <Badge key={color.name} variant="secondary" className="flex items-center gap-1">
+              {color.name}
               <X className="w-3 h-3 cursor-pointer" onClick={() => handleColorChange(color)} />
             </Badge>
           ))}
-          {activeFilters.materials.map((material: string) => (
-            <Badge key={material} variant="secondary" className="flex items-center gap-1">
-              {material}
+          {activeFilters.materials.map((material: Material) => (
+            <Badge key={material.name} variant="secondary" className="flex items-center gap-1">
+              {material.name}
               <X className="w-3 h-3 cursor-pointer" onClick={() => handleMaterialChange(material)} />
             </Badge>
           ))}
@@ -130,16 +130,16 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
         </CardHeader>
         <CardContent className="space-y-3">
           {categories
-            .filter((c) => c !== "All")
+            .filter((c) => c.name !== "All")
             .map((category) => (
-              <div key={category} className="flex items-center space-x-2">
+              <div key={category.name} className="flex items-center space-x-2">
                 <Checkbox
-                  id={category}
+                  id={category.name}
                   checked={activeFilters.categories.includes(category)}
                   onCheckedChange={() => handleCategoryChange(category)}
                 />
-                <label htmlFor={category} className="text-sm cursor-pointer">
-                  {category}
+                <label htmlFor={category.name} className="text-sm cursor-pointer">
+                  {category.name}
                 </label>
               </div>
             ))}
@@ -153,16 +153,16 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
         </CardHeader>
         <CardContent className="space-y-3">
           {colors
-            .filter((c) => c !== "All")
+            .filter((c) => c.name !== "All")
             .map((color) => (
-              <div key={color} className="flex items-center space-x-2">
+              <div key={color.name} className="flex items-center space-x-2">
                 <Checkbox
-                  id={color}
+                  id={color.name}
                   checked={activeFilters.colors.includes(color)}
                   onCheckedChange={() => handleColorChange(color)}
                 />
-                <label htmlFor={color} className="text-sm cursor-pointer">
-                  {color}
+                <label htmlFor={color.name} className="text-sm cursor-pointer">
+                  {color.name}
                 </label>
               </div>
             ))}
@@ -176,16 +176,16 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
         </CardHeader>
         <CardContent className="space-y-3">
           {materials
-            .filter((m) => m !== "All")
+            .filter((m) => m.name !== "All")
             .map((material) => (
-              <div key={material} className="flex items-center space-x-2">
+              <div key={material.name} className="flex items-center space-x-2">
                 <Checkbox
-                  id={material}
+                  id={material.name}
                   checked={activeFilters.materials.includes(material)}
                   onCheckedChange={() => handleMaterialChange(material)}
                 />
-                <label htmlFor={material} className="text-sm cursor-pointer">
-                  {material}
+                <label htmlFor={material.name} className="text-sm cursor-pointer">
+                  {material.name}
                 </label>
               </div>
             ))}
