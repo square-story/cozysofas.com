@@ -82,12 +82,12 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
   }
 
   const clearAllFilters = () => {
-    setPriceRange([0, 0])
+    setPriceRange([0, maxPrice])
     onFiltersChange({
       categories: [],
       colors: [],
       materials: [],
-      priceRange: [0, 0],
+      priceRange: [0, maxPrice],
       inStock: false,
     })
   }
@@ -97,7 +97,8 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
       activeFilters.categories.length +
       activeFilters.colors.length +
       activeFilters.materials.length +
-      (activeFilters.inStock ? 1 : 0)
+      (activeFilters.inStock ? 1 : 0) +
+      (priceRange[0] !== 0 || priceRange[1] !== maxPrice ? 1 : 0)
     )
   }
 
