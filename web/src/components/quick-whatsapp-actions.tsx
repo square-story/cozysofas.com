@@ -55,7 +55,6 @@ Looking forward to hearing from you!`
             onClick={handleQuickInquiry}
             className="bg-white border-green-200 text-green-700 hover:bg-green-50"
           >
-            <MessageCircle className="w-2 h-2 mr-0" />
             General Inquiry
           </Button>
 
@@ -64,7 +63,6 @@ Looking forward to hearing from you!`
             onClick={handleCustomDesign}
             className="bg-white border-green-200 text-green-700 hover:bg-green-50"
           >
-            <Phone className="w-2 h-2 mr-0" />
             Custom Design
           </Button>
         </div>
