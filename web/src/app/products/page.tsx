@@ -275,7 +275,7 @@ export default function ProductsPage() {
                       categories: [],
                       colors: [],
                       materials: [],
-                      priceRange: [0, 3000],
+                      priceRange: [0, maxPrice],
                       inStock: false,
                     })
                   }}
