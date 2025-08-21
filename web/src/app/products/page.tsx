@@ -38,7 +38,7 @@ export default function ProductsPage() {
           getMaterialsData()
         ]);
         
-        // Update the exported variables
+       
         Object.assign(products, productsData);
         Object.assign(categories, categoriesData);
         Object.assign(colors, colorsData);
@@ -74,7 +74,11 @@ export default function ProductsPage() {
       // Category filter
       if (
         filters.categories.length > 0 &&
-        !filters.categories.some(category => category.name === product.category.name)
+        !filters.categories.some(category => {
+          // Check if product.category exists before comparing
+          if (!product.category) return false;
+          return category.name === product.category.name;
+        })
       ) {
         return false
       }
@@ -82,7 +86,9 @@ export default function ProductsPage() {
       // Color filter
       if (
         filters.colors.length > 0 &&
-        !product.colors.some((color) => color.name === product.category.name)
+        !product.colors.some((productColor) => 
+          filters.colors.some(filterColor => filterColor.name === productColor.name)
+        )
       ) {
         return false
       }
@@ -90,7 +96,9 @@ export default function ProductsPage() {
       // Material filter
       if (
         filters.materials.length > 0 &&
-        !product.materials.some((material) => material.name === product.category.name)
+        !product.materials.some((productMaterial) => 
+          filters.materials.some(filterMaterial => filterMaterial.name === productMaterial.name)
+        )
       ) {
         return false
       }

@@ -30,7 +30,6 @@ export function ProductFilters({ onFiltersChange, activeFilters }: ProductFilter
           getMaterialsData()
         ]);
         
-        // Update the exported variables
         Object.assign(categories, categoriesData);
         Object.assign(colors, colorsData);
         Object.assign(materials, materialsData);
